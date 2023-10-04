@@ -21,7 +21,7 @@ jobs:
 
   build:
     docker: 
-      - image: cirruslabs/flutter
+      - image: instrumentisto/flutter
     steps:
       - checkout
       - run: 
