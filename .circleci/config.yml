@@ -5,8 +5,22 @@ version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@2.0.6
   slack: circleci/slack@4.8.2
+  android: circleci/android@1.0.3
+  flutter: circleci/flutter@2.0.0
 
 jobs:
+  distribute:
+    executor:
+      name: android/android-machine
+    steps:
+      - flutter/install_sdk_and_pub:
+          version: 3.0.3
+      - flutter/install_android_gradle_dependencies
+      - flutter/install_android_gem
+      - run:
+          command: bundle exec fastlane distribute
+          working_directory: ios
+          
   build:
     docker: 
       - image: cirrusci/flutter
