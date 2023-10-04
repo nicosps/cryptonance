@@ -8,11 +8,8 @@ jobs:
   build:
     executor:
       name: android/android-machine
-      resource-class: medium
-
     steps:
       - checkout
-
       - flutter/install_sdk_and_pub:
           version: stable
       - flutter/install_android_gradle_dependencies
