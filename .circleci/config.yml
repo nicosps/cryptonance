@@ -7,19 +7,15 @@ orbs:
   flutter: circleci/flutter@2.0.0
   slack: circleci/slack@4.1
 
-jobs:
-  distribute:
-    executor:
-      name: android/android-machine
-    steps:
-      - flutter/install_sdk_and_pub:
-          version: 3.0.3
-      - flutter/install_android_gradle_dependencies
-      - flutter/install_android_gem
-      - run:
-          command: bundle exec fastlane distribute
-          working_directory: ios
+workflows:
+  build:
+    jobs:
+      - build:
+          context:
+            - cicd
+            - slack
 
+jobs:
   build:
     docker: 
       - image: instrumentisto/flutter
