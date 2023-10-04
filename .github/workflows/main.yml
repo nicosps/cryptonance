@@ -20,9 +20,18 @@ jobs:
           channel: 'stable'
       - run: flutter pub get 
       - run: flutter build apk --release --split-per-abi
+
+      - name: Version Increment
+        uses: reecetech/version-increment@2023.9.3
+        id: version
+        with:
+          scheme: semver
+          increment: patch
+
       
       - name: Push to Release 
         uses: ncipollo/release-action@v1
         with: 
           artifacts: "build/app/outputs/apk/release/*"
-          token: ${{secrets.TOKEN}}
+          tags: v${{ steps.version.outputs.version }}"
+          token: ${{ secrets.TOKEN }}
