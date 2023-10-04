@@ -14,7 +14,7 @@ jobs:
       - checkout
 
       - flutter/install_sdk: 
-          version: stable
+          version: 3.7.9
 
       - flutter/install_pub:
           cache-version: v1
