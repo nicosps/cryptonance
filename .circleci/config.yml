@@ -1,23 +1,20 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
 orbs:
-  android: circleci/android@1.0.3
-  flutter: circleci/flutter@2.0.0
+  aws-cli: circleci/aws-cli@2.0.6
+  slack: circleci/slack@4.8.2
+
 jobs:
-  distribute:
-    executor:
-      name: android/android-machine
+  build:
+    docker: 
+      - image: cirrusci/flutter
     steps:
-      - flutter/install_sdk_and_pub:
-          version: 3.0.3
-      - flutter/install_android_gradle_dependencies
-      - flutter/install_android_gem
-      - run:
-          command: bundle exec fastlane distribute
-          working_directory: ios
+      - checkout
       - run: 
-          command: flutter doctor
-workflows:
-  distribute:
-    jobs:
-      - distribute
+          name: Build Flutter (Android)
+          command: |
+            flutter build apk --release
+      - store_artifacts:
+          path: build/app/outputs/flutter-apk/app-release.apk
