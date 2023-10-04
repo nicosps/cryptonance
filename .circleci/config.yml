@@ -8,17 +8,16 @@ orbs:
   slack: circleci/slack@4.1
 
 workflows:
-  build:
-    jobs:
-      - build:
-          context:
-            - cicd
-            - slack
+  send-notification:
+     jobs:
+      - notify:
+          context: slack-secrets
 
 jobs:
   build:
     docker: 
       - image: instrumentisto/flutter
+      - image: cimg/base:stable
     steps:
       - checkout
       - run: 
