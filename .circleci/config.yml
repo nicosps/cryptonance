@@ -5,6 +5,7 @@ version: 2.1
 orbs:
   android: circleci/android@1.0.3
   flutter: circleci/flutter@2.0.0
+  slack: circleci/slack@4.8.2
 
 jobs:
   distribute:
@@ -29,4 +30,21 @@ jobs:
           command: |
             flutter build apk --release
       - store_artifacts:
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk\
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "Download APK: https://s3.ap-southeast-1.amazonaws.com/assets-dev.dgtal.id/apk/app-release.apk",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
