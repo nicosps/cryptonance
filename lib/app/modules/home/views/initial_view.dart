@@ -33,7 +33,7 @@ class InitialView extends StatelessWidget {
         gap: 10,
         padding: const EdgeInsets.all(15),
         color: Colors.black,
-        activeColor: AppColors.deepMauve,
+        activeColor: deepMauve,
         tabs: const [
           GButton(
             icon: LineIcons.home,
