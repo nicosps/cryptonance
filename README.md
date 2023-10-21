@@ -1,5 +1,9 @@
 # cryptonance
 
+# For UI design result, please check in this branch : master-getx
+
+Please run this command "flutter pub get" before run the command.
+
 stand for : Crypto Finance
 
 ## How to Start?
